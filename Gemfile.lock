@@ -2,7 +2,9 @@ PATH
   remote: .
   specs:
     email_tracker (0.1.0)
-      rails (~> 6.1.3)
+      httparty (~> 0.18.1)
+      que (~> 0.14.3)
+      rails (>= 6.0.0)
 
 GEM
   remote: https://rubygems.org/

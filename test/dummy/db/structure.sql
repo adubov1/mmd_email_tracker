@@ -35,7 +35,8 @@ CREATE TABLE public.email_tracker_emails (
     "to" character varying,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    track_id character varying
+    track_id character varying,
+    message_id character varying
 );
 
 
@@ -69,7 +70,8 @@ CREATE TABLE public.email_tracker_opens (
     state character varying,
     email_tracker_emails_id bigint,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    email_id integer
 );
 
 
@@ -205,6 +207,13 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: index_email_tracker_email_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_email_tracker_email_id ON public.email_tracker_opens USING btree (email_id);
+
+
+--
 -- Name: index_email_tracker_opens_on_email_tracker_emails_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -229,6 +238,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210223022553'),
 ('20210223023010'),
 ('20210223031427'),
-('20210223033007');
+('20210223033007'),
+('20210223180809'),
+('20210223192348');
 
 

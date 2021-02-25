@@ -3,5 +3,6 @@ module EmailTracker
     isolate_namespace EmailTracker
 
     config.active_record.schema_format = :sql
+    config.api_only = true
   end
 end

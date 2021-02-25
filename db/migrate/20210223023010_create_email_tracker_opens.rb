@@ -1,4 +1,4 @@
-class CreateEmailTrackerOpens < ActiveRecord::Migration[6.1]
+class CreateEmailTrackerOpens < ActiveRecord::Migration[6.0]
   def change
     create_table :email_tracker_opens do |t|
       t.string :ip_address

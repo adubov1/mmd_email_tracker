@@ -1,26 +1,37 @@
 require_dependency "email_tracker/application_controller"
-require_dependency "../lib/email_tracker/create_tracking_link"
 
 module EmailTracker
   class EmailsController < ApplicationController
 
     def create
-      @email = Email.new(email_params)
+      @email = Email.find_or_create_by(email_params)
 
       if @email.save
-        render text: CreateTrackingLink.(@email)
+        render json: { url: "http://#{request.host}/et/o/#{@email.track_id}.gif" }
       end
     end
 
     def show
-      @email = Email.find(email_params[:gmail_id])
-      render json: @email.opens.to_json
+      @email = Email.find_by_message_id(params['id'])
+      date_format = ->(date_str) { DateTime.parse(date_str).strftime("%b %e,%l:%M %p") }
+      opens = @email.opens.as_json.map! do |o|
+        {
+          time: date_format.(o['created_at']),
+          city: o['city'],
+          state: o['state']
+        }
+      end
+      render json: opens
     end
 
     private
 
+      def history_params
+        params.require(:message_id)
+      end
+
       def email_params
-        params.require(:email).permit(:from, :to, :gmail_id)
+        params.require(:email).permit(:from, :to, :message_id)
       end
   end
 end
