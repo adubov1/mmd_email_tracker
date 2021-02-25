@@ -4,5 +4,9 @@ module EmailTracker
 
     config.active_record.schema_format = :sql
     config.api_only = true
+
+    def self.setup(&block)
+      yield self.config
+    end
   end
 end
