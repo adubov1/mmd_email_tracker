@@ -7,7 +7,7 @@ module EmailTracker
     def generate_tracking_blob
       return track_id if track_id
 
-      track_id = Base64.encode64("#{from}_#{message_id}").strip
+      track_id = Base64.strict_encode64("#{from}_#{message_id}").strip
       if update(track_id: track_id)
           track_id
       else
