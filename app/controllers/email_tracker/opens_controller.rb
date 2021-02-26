@@ -4,7 +4,8 @@ module EmailTracker
   class OpensController < ApplicationController
 
     def open
-      @email = Email.find_by_track_id(opens_params)
+      track_id = opens_params.gsub("\n", "")
+      @email = Email.find_by_track_id(track_id)
       
       @email.opens.create(ip_address: request.remote_ip)
       send_data(
