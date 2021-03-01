@@ -7,7 +7,7 @@ module EmailTracker
       @email = Email.find_or_create_by(email_params)
 
       if @email.save
-        render json: { url: "http://#{request.host}/et/o/#{@email.track_id}.gif" }
+        render json: { url: "http://#{request.host}/et/o.svg?t=#{@email.track_id}" }
       end
     end
 

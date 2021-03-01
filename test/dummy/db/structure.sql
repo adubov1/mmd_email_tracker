@@ -36,7 +36,8 @@ CREATE TABLE public.email_tracker_emails (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     track_id character varying,
-    message_id character varying
+    message_id character varying,
+    origin_ip_address character varying
 );
 
 
@@ -240,6 +241,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210223031427'),
 ('20210223033007'),
 ('20210223180809'),
-('20210223192348');
+('20210223192348'),
+('20210301190715');
 
 

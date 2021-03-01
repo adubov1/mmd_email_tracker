@@ -1,4 +1,4 @@
 EmailTracker::Engine.routes.draw do
   resources :emails
-  get '/o/:track_id', to: 'opens#open'
+  get '/o', to: 'opens#open'
 end
